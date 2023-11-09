@@ -1,4 +1,4 @@
-package com.example.select_lunch.controller;
+package com.example.select_lunch.controller.lunch;
 
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
