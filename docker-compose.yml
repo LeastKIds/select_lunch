@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  java:
+    image: gradle:jdk17
+    network_mode: "host"
+    volumes:
+      - ./backend/select_lunch:/app
+    container_name: java_select_lunch
+    command: sleep infinity
