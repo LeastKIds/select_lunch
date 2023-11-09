@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -65,5 +66,31 @@ public class LunchController {
 
         return restTemplate.getForObject(url, String.class);
 
+    }
+
+    @GetMapping("/get-ip")
+    public String getClientIp(HttpServletRequest request) {
+        String remoteAddr = "";
+
+        if (request != null) {
+            remoteAddr = request.getHeader("X-FORWARDED-FOR");
+            if (remoteAddr == null || "".equals(remoteAddr)) {
+                remoteAddr = request.getRemoteAddr();
+            }
+        }
+
+        return remoteAddr;
+    }
+
+    @GetMapping("/check-origin")
+    public String checkOrigin(HttpServletRequest request) {
+        // 클라이언트의 Origin 헤더 값 가져오기
+        String originHeader = request.getHeader("Origin");
+        System.out.println("Origin Received: " + originHeader);
+        
+        // 여기에 추가적인 로직을 구현할 수 있습니다. 예를 들어, 허용 목록과 비교 등
+        // ...
+
+        return "Origin Header received: " + originHeader;
     }
 }

@@ -5,9 +5,11 @@ services:
     image: gradle:jdk17
     volumes:
       - ./backend/select_lunch:/app
+    ports:
+      - "8080:8080"
     networks:
       - our_net
-    container_name: java_select_lunch
+    container_name: javaSelectLunch
     command: sleep infinity
 
   react:
@@ -18,7 +20,7 @@ services:
       - our_net
     ports:
       - "3000:3000"
-    container_name: react_select_lunch
+    container_name: reactSelectLunch
     command: sleep infinity
 
 networks:
